@@ -1,0 +1,66 @@
+{
+  "name": "acloud-agent",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-06",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "acloud-agent.righttu.uk",
+      "custom_domain": true
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "browser": {
+    "binding": "BROWSER"
+  },
+  "worker_loaders": [
+    {
+      "binding": "LOADER"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SUPPORT",
+        "class_name": "AcloudSupportAgent"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "AcloudSupportAgent"
+      ]
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "REPORTS",
+      "bucket_name": "acloud-reports","preview_bucket_name": "acloud-reports"
+    }
+  ],
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "vars": {
+    "MCP_URL": "https://acloud-mcp-s.righttu.uk/mcp",
+    "SANDBOX_URL": "https://acloud-sandbox.righttu.uk",
+    "AI_GATEWAY_ID": "acloud-gateway"
+  },
+  "triggers": {
+    "crons": [
+      "0 1 * * MON"
+    ]
+  },
+  "observability": {
+    "enabled": true
+  }
+}
